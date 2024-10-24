@@ -1,0 +1,55 @@
+version: '3.1'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- deny
+- goodbye
+- affirm
+- copy_file
+forms:
+  file_form:
+    required_slots:
+      - path
+  second_file_form:
+    required_slots:
+      - dst_path
+
+slots:
+  path:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: file_form
+           requested_slot: path
+  dst_path:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: second_file_form
+           requested_slot: dst_path
+
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  utter_goodbye:
+  - text: Bye
+  utter_ask_path:
+  - text: 请输入路径
+  utter_request_first_object:
+  - text: 请输入源对象信息
+  utter_request_second_object:
+  - text: 请输入目的对象信息
+  utter_submit_file:
+  - text: 好的，谢谢!
+actions:
+- utter_greet
+- utter_request_first_object
+- utter_request_second_object
+- action_copy_file
+

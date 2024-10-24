@@ -1,0 +1,24 @@
+version: "3.1"
+
+stories:
+
+# - story: 向服务器上传文件
+#   steps:
+#   - intent: upload_file
+#   - action: upload_file_form
+#   - active_loop: upload_file_form
+#   - slot_was_set:
+#     - requested_slot: dest_ip
+#   - slot_was_set:
+#     - dest_ip: 192.168.1.3
+#   - slot_was_set:
+#     - requested_slot: username
+#   - slot_was_set:
+#     - username: admin
+#   - slot_was_set:
+#     - requested_slot: password
+#   - slot_was_set:
+#     - password: admin-123
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null

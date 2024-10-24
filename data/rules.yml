@@ -1,0 +1,54 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+# - rule: Activate form
+#   steps:
+#   - intent: request_names
+#   - action: name_form
+#   - active_loop: name_form
+
+# - rule: Submit form
+#   condition:
+#   - active_loop: name_form
+#   steps:
+#   - action: name_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - action: utter_submit
+#   - action: utter_slots_values
+
+- rule: First Object
+  steps:
+  - intent: copy_file
+  - action: utter_request_first_object
+  - action: file_form
+  - active_loop: file_form
+
+- rule: Second Object
+  condition:
+  - active_loop: file_form
+  steps:
+  - action: file_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_request_second_object
+  - action: second_file_form
+  - active_loop: second_file_form
+
+- rule: Submit form
+  condition:
+  - active_loop: second_file_form
+  steps:
+  - action: second_file_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_copy_file
